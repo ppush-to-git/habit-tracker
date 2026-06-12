@@ -1,0 +1,28 @@
+<html>
+<body>
+<h1>Habit Tracker:</h1>
+<form method="POST">
+<textarea
+name="habit">
+</textarea>
+<br>
+<button name="add">
+Add To List
+</button>
+{%for habit in habits%}
+<h2>{{loop.index}}.{{habit[1]}} <br></h2>
+<h3>Last Completed On: {{habit[2]}}</h3>
+<h3>Current Streak: {{habit[3]}}</h3>
+<button name="completed" value={{habit[0]}}>
+Completed Today
+</button>
+<button name="delete" value={{habit[0]}}>
+Delete Habit
+</button>
+<button name="edit" value={{habit[0]}}>
+Edit Habit
+</button>
+{%endfor%}
+</form>
+</body>
+</html>
