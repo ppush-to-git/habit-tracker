@@ -1,0 +1,20 @@
+<html>
+    <body>
+        <h1>Login:</h1>
+        <form method="POST">
+            <h3>Enter Username:</h3>
+            <input type="text" name="username">
+            <h3>Enter Password:</h3>
+            <input type="text" name="password">
+            <br>
+            <button name="login">
+                Login
+            </button>
+            {%if message%}
+            <h4>{{message}}</h4>
+            {%endif%}
+            <h4>If you don't have an account:</h4>
+            <button name="signup">Go to Signup Page</button>
+        </form>
+    </body>
+</html>
