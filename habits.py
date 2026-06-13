@@ -133,7 +133,7 @@ def login():
     return render_template("login.html")
 @app.route("/home", methods=["GET","POST"])
 def home():
-    uid=session['user_id']
+    uid=session.get('user_id')
     if uid is None:
         return redirect("/login")
     habits=viewHabits(uid)
