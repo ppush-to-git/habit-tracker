@@ -7,6 +7,7 @@ Habit tracking web application built with Flask and SQLite.
 - Mark habits as completed
 - Daily streak tracking
 - Automatic streak resets for missed days
+- Longest streak tracking
 - Authentication System
 
 ## Tech Stack

@@ -12,8 +12,8 @@ Add To List
 </button>
 {%for habit in habits%}
 <h2>{{loop.index}}.{{habit[1]}} <br></h2>
-<h3>Last Completed On: {{habit[2]}}</h3>
-<h3>Current Streak: {{habit[3]}}</h3>
+<h4>Last Completed On: {{habit[2]}}</h4>
+<h4>Current Streak: {{habit[3]}}<br> Longest Streak: {{habit[5]}}</h4>
 <button name="completed" value={{habit[0]}}>
 Completed Today
 </button>
