@@ -1,28 +1,45 @@
 <html>
+    <head>
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
-<h1>Habit Tracker:</h1>
+<div class="center">
+<h1>Habit-Tracking</h1>
+</div>
 <form method="POST">
+<h3>Enter what to track:</h3>
+<div class="inputs">
 <textarea
 name="habit">
 </textarea>
+</div>
 <br>
-<button name="logout">Logout</button>
+<div class="action-home">
 <button name="add">
 Add To List
 </button>
+<button name="logout">Logout</button>
+</div>
+<br><br>
 {%for habit in habits%}
+<div class="habit-card">
 <h2>{{loop.index}}.{{habit[1]}} <br></h2>
 <h4>Last Completed On: {{habit[2]}}</h4>
 <h4>Current Streak: {{habit[3]}}<br> Longest Streak: {{habit[5]}}</h4>
+<div class="action-home">    
 <button name="completed" value={{habit[0]}}>
 Completed Today
 </button>
 <button name="delete" value={{habit[0]}}>
-Delete Habit
+Delete
 </button>
 <button name="edit" value={{habit[0]}}>
-Edit Habit
+Edit
 </button>
+</div>
+</div>
 {%endfor%}
 </form>
 </body>

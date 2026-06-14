@@ -1,8 +1,14 @@
 <html>
+    <head>
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
     <body>
+        <h1>Edit Title</h1>
         <form method="POST">
             <h2>{{habit[1]}}</h2>
-            <h3>New Habit:</h3>
+            <h3>New Title:</h3>
             <input type="text" name="edit" value={{habit[1]}}>
             <button name="editbutton">Edit</button>
             <button name="home">Home</button>

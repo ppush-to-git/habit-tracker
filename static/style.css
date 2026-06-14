@@ -1,0 +1,46 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 50px;
+    background-color: #121826;
+    color: #E5E7EB;
+}
+form{
+    background-color: #1E293B;
+    max-width: 500px;
+    margin:auto;
+    border: 1px solid lightgray;
+    padding: 30px;
+    border-radius: 10px;    
+}
+input,textarea{
+    background-color: antiquewhite;
+    width:100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+button{
+    background-color: #22C55E;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #16A34A;
+}
+.habit-card{
+    background-color: #1a2536;
+    border: 1px solid gray;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+.action-home{
+    display: flex;
+    gap: 10px;
+}
+.center{
+    text-align: center;
+}
