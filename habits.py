@@ -39,6 +39,7 @@ def addUser(username,password):
     data=curs.fetchall()
     for row in data:
         if username==row[1]:
+            conn.close()
             return "exists"
     curs.execute(f"""
     INSERT INTO users(username,password)
@@ -53,6 +54,7 @@ def loginUser(username,password):
     curs.execute("""SELECT * FROM users
                  WHERE username=? AND password=?""",(username,password,))
     user=curs.fetchone()
+    conn.close()
     if user is None:
         return None
     return user[0]
@@ -117,17 +119,17 @@ def signup():
         return redirect("/home")
     if request.method=="POST":
         if "signup" in request.form:
-            username=request.form["username"]
-            password=request.form["password"]
-            password=hashlib.sha256(password.encode()).hexdigest()
-            if username=="" or password=="":
-                message="Please fill both the boxes!"
+            username = request.form["username"]
+            rawpassword = request.form["password"]
+            if username == "" or rawpassword == "":
+                message = "Please fill both the boxes!"
             else:
-                check=addUser(username,password)
-                if check=="exists":
-                    message="Username already exists! Go to the login page or try another username!"
+                password = hashlib.sha256(rawpassword.encode()).hexdigest()
+                check = addUser(username, password)
+                if check == "exists":
+                    message = "Username already exists! Go to the login page or try another username!"
                 else:
-                    message="Signed up successfully!"
+                    message = "Signed up successfully!"
             return render_template("signup.html",message=message)
         elif "login" in request.form:
             return redirect("/login")
@@ -192,8 +194,9 @@ def home():
                         updateHabit("lastcompleted",today,idn,uid)
             updateMaxstreak(idn,uid)  
         elif "add" in request.form:
-            habit = (request.form["habit"])
-            addHabit(habit,uid)
+            habit = request.form["habit"].strip()
+            if habit != "":
+                addHabit(habit, uid)
         elif "logout" in request.form:
             session.pop("user_id", None)
             return redirect("/login")
@@ -204,11 +207,14 @@ def home():
     return render_template("home.html",habits=habits)
 @app.route("/edit/<int:idn>", methods=["GET","POST"])
 def edit(idn):
-    uid=session['user_id']
+    uid = session.get("user_id")
+    if uid is None:
+        return redirect("/login")
     if request.method=="POST":
         if "editbutton" in request.form:
-            value=request.form['edit']
-            updateHabit("habit",value,idn,uid)
+            value = request.form["edit"].strip()
+            if value != "":
+                updateHabit("habit", value, idn, uid)
         elif "home" in request.form:
             return redirect("/home")
     habits=viewHabits(uid)
@@ -217,4 +223,5 @@ def edit(idn):
             habit=hab
     return render_template("edit.html",habit=habit)
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
